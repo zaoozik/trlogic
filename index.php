@@ -9,7 +9,7 @@ require_once "core/functions.php";
 define('SITE_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define("CORE", SITE_ROOT . 'core' . DIRECTORY_SEPARATOR);
 define("CONTROLLERS", SITE_ROOT . 'controllers' . DIRECTORY_SEPARATOR);
-define("CONTROLLERS", SITE_ROOT . 'views' . DIRECTORY_SEPARATOR);
+define("VIEWS", SITE_ROOT . 'views' . DIRECTORY_SEPARATOR);
 
 // register autoloader
 spl_autoload_register(function ($class)  {
@@ -23,12 +23,7 @@ spl_autoload_register(function ($class)  {
         return false;
 });
 
-
 $routes = require "settings/routes.php";
 
 Router::init($routes);
 
-$main_content = include_template('auth.php');
-$layout_content = include_template('layout.php', ['content' => $main_content, 'title' => 'TR_LOGIC']);
-
-print($layout_content);

@@ -1,5 +1,8 @@
 <?php
 namespace core;
+
+use Exception;
+
 /**
  * Class Router
  * Simpliest one-level router. second-level urls and more lead to 404
@@ -15,59 +18,58 @@ final  class Router{
      */
     public static function init(array $routes)
     {
-        if (empty($routes))
-        {
-            throw new \Exception("Routes list is empty.");
+        if (empty($routes)) {
+            throw new Exception("Routes list is empty.");
         }
         foreach ($routes as $route){
-            if (isset($route['url']) and isset($route['controller']) and  isset($route['method']))
-            {
+            if (isset($route['url']) and isset($route['controller']) and  isset($route['method'])) {
                 array_push(self::$routes,
-                [
-                    "url" => $route['url'],
-                    "controller" => $route['controller'],
-                    "method" => $route['method']
-                ]);
+                    [
+                        "url" => $route['url'],
+                        "controller" => $route['controller'],
+                        "method" => $route['method']
+                    ]);
             } else {
-                throw new \Exception("Routes list has incorrect format.");
+                throw new Exception("Routes list has incorrect format.");
             }
         }
         self::dispatch();
     }
 
 
-    public static function dispatch(){
+    private static function dispatch()
+    {
+        session_start();
+
         $requested_url = self::get_server_url();
         $method = $_SERVER["REQUEST_METHOD"];
 
-        if (! self::check_url_levels($requested_url))
-        {
+        if (! self::check_url_levels($requested_url)) {
             self::not_found();
         }
 
         $controller = null;
 
-        foreach (self::$routes as $route)
-        {
-            if ($route['url'] == $requested_url and $route['method'] == $method)
-            {
+        foreach (self::$routes as $route) {
+            if ($route['url'] == $requested_url and $route['method'] == $method) {
                 $controller = $route['controller'];
                 break;
             }
         }
 
-        if (! $controller)
-        {
+        if (! $controller) {
             self::not_found();
         }
 
+        $controller = "controllers\\" . $controller;
+
         if (is_callable($controller)) {
 
-            $response = $controller();
+            $controller();
 
         } else {
             {
-                throw new \Exception("Controller is not a function. Name: '". $controller . "'");
+                throw new Exception("Controller is not a function. Name: '" . $controller . "'");
             }
 
         }
@@ -75,6 +77,8 @@ final  class Router{
     }
 
     public static function redirect (string $url){
+        header("Location: " . $url, true, 302);
+        die;
 
     }
 
@@ -87,17 +91,16 @@ final  class Router{
 
     private static function check_url_levels (string $url){
         $levels = mb_split("/", $url);
-         return count($levels) <= 2;
+        return count($levels) <= 2;
 
     }
 
     private static function get_server_url (){
         $url = $_SERVER['REQUEST_URI'];
         //normalizing
-        $url = '/'. trim($_SERVER['REQUEST_URI'], '/');
+        $url = '/' . trim($url, '/');
         return $url;
     }
-
 
 
 }
