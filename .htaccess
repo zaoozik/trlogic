@@ -1,0 +1,13 @@
+AddType image/x-icon .ico
+AddDefaultCharset UTF-8
+Options +FollowSymlinks
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_URI} \.(ini|php)$
+RewriteRule ^(.*) index.php [L,QSA] 
+RewriteRule ^(.+)/$ /$1 [R=301,L] # ��������� ����.
+</IfModule>
+
