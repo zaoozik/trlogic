@@ -1,8 +1,8 @@
 <?php
 
+use core\Languages;
 use core\Router;
 
-require_once "core/functions.php";
 
 //SITES CONSTS
 
@@ -10,6 +10,9 @@ define('SITE_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define("CORE", SITE_ROOT . 'core' . DIRECTORY_SEPARATOR);
 define("CONTROLLERS", SITE_ROOT . 'controllers' . DIRECTORY_SEPARATOR);
 define("VIEWS", SITE_ROOT . 'views' . DIRECTORY_SEPARATOR);
+define("LANGUAGE_STRINGS_PATH", SITE_ROOT . 'assets' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR);
+define("DEFAULT_LANGUAGE", "ru");
+
 
 // register autoloader
 spl_autoload_register(function ($class)  {
@@ -23,7 +26,12 @@ spl_autoload_register(function ($class)  {
         return false;
 });
 
-$routes = require "settings/routes.php";
+session_start();
+if (!isset($_SESSION['LANGUAGE'])) {
+    $_SESSION['LANGUAGE'] = DEFAULT_LANGUAGE;
+}
+Languages::set_current_language($_SESSION['LANGUAGE']);
 
+$routes = require "settings/routes.php";
 Router::init($routes);
 

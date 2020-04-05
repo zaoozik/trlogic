@@ -39,7 +39,7 @@ final  class Router{
 
     private static function dispatch()
     {
-        session_start();
+
 
         $requested_url = self::get_server_url();
         $method = $_SERVER["REQUEST_METHOD"];
@@ -79,6 +79,13 @@ final  class Router{
     public static function redirect (string $url){
         header("Location: " . $url, true, 302);
         die;
+
+    }
+
+    public static function rawPOST()
+    {
+        $post = file_get_contents("php://input");
+        return $post;
 
     }
 

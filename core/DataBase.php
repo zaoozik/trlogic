@@ -1,7 +1,13 @@
 <?php
 
 namespace core;
-///Class Database, works with mysql only
+
+use Exception;
+
+/**
+ * Class DataBase
+ * @package core
+ */
 final class DataBase {
 
     private $conn  = null;
@@ -26,7 +32,7 @@ final class DataBase {
 
         $this->conn = mysqli_connect('localhost', 'root', 'belomor', 'tr_logic');
         if (! $this->conn){
-            throw new \Exception( mysqli_connect_error());
+            throw new Exception(mysqli_connect_error());
         }
         mysqli_set_charset($this->conn, "utf8");
 

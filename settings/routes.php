@@ -20,5 +20,10 @@ return [
         "url" => "/account",
         "controller" => "Account::view",
         "method" => "GET"
+    ],
+    [
+        "url" => "/change_language",
+        "controller" => "Main::change_language",
+        "method" => "POST"
     ]
 ];
