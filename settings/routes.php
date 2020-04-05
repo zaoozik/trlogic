@@ -12,6 +12,11 @@ return [
         "method" => "GET"
     ],
     [
+        "url" => "/auth",
+        "controller" => "Auth::auth",
+        "method" => "POST"
+    ],
+    [
         "url" => "/register",
         "controller" => "Register::view",
         "method" => "GET"

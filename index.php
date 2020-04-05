@@ -1,5 +1,6 @@
 <?php
 
+use core\DataBase;
 use core\Languages;
 use core\Router;
 
@@ -31,6 +32,10 @@ if (!isset($_SESSION['LANGUAGE'])) {
     $_SESSION['LANGUAGE'] = DEFAULT_LANGUAGE;
 }
 Languages::set_current_language($_SESSION['LANGUAGE']);
+
+$db_settings = require "settings/database.php";
+DataBase::load_settings($db_settings);
+
 
 $routes = require "settings/routes.php";
 Router::init($routes);

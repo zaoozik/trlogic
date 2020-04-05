@@ -2,7 +2,7 @@
 
 return  [
     "host" => "localhost",
-    "user" => "root",
+    "user" => "zaoozik",
     "password" => "belomor",
     "database" => "tr_logic"
 ];

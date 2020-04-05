@@ -3,8 +3,11 @@
 namespace controllers;
 
 use core\BaseController;
+use core\DataBase;
 use core\Languages;
+use core\Router;
 use core\Viewer;
+use models\Users;
 
 final class Auth extends BaseController
 {
@@ -44,6 +47,23 @@ final class Auth extends BaseController
                 'language_select' => $language_select,
                 'title' => 'TR_LOGIC']);
         print ($layout_content);
+    }
+
+    public static function auth()
+    {
+        if (isset($_POST['login']) and isset($_POST['password'])) {
+            $user = new Users();
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            if ($user->get_by_login($login)) {
+                if (password_verify($password, $user->get('password'))) {
+                    $_SESSION['user_login'] = $user->get('login');
+                    Router::redirect('/account');
+                }
+            }
+        } else {
+            Router::redirect('/auth');
+        }
     }
 }
 
