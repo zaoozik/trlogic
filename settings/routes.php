@@ -17,9 +17,19 @@ return [
         "method" => "POST"
     ],
     [
-        "url" => "/register",
-        "controller" => "Register::view",
+        "url" => "/logout",
+        "controller" => "Auth::logout",
         "method" => "GET"
+    ],
+    [
+        "url" => "/registration",
+        "controller" => "Registration::view",
+        "method" => "GET"
+    ],
+    [
+        "url" => "/registration",
+        "controller" => "Registration::registration",
+        "method" => "POST"
     ],
     [
         "url" => "/account",

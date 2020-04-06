@@ -12,6 +12,7 @@ final class Account extends BaseController
 
     public static function view()
     {
+        self::login_required();
 
         $content = Viewer::render('account');
         $response = Viewer::render('layout', [

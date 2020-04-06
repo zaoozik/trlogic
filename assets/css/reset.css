@@ -9,7 +9,7 @@ body {
 }
 
 .wrapper {
-    min-height: 90%;
+    min-height: 96%;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
@@ -17,12 +17,50 @@ body {
 footer {
     box-shadow: 0 0 2px  rgba(0,0,0,0.7);
     width: 100%;
-    height: 30px;
+    height: 35px;
+    text-align: right;
+    background-color: #ffeeba;
+
+}
+
+.footer-copyright {
+    padding-right: 20px;
+
 }
 .auth {
     position: relative;
+    margin: auto auto;
+    padding: 20px 30px 20px 20px;
+    width: 560px;
+    height: 410px;
+    max-width: 560px;
+}
+
+.sign-up {
+    float: left;
+    margin-right: 7px;
+}
+
+.registration {
+    position: relative;
     margin: 0 auto;
-    top: 50%;
-    width: 40%;
-    min-width: 320px;
+    padding: 20px 30px 20px 20px;
+    width: 560px;
+    height: 750px;
+    max-width: 560px;
+}
+
+.language-select {
+    position: relative;
+    margin: 20px;
+}
+
+.language-select label {
+    padding-right: 0.5em;
+    font-weight: bold;
+}
+
+.alert {
+    margin-top: 15px;
+    text-align: center;
 }

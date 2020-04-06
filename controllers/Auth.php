@@ -12,7 +12,7 @@ use models\Users;
 final class Auth extends BaseController
 {
 
-    public static function view()
+    public static function view(array $parameters = [])
     {
         $options = [
             [
@@ -37,21 +37,22 @@ final class Auth extends BaseController
                 "strings" => $strings,
                 "options" => $options
             ]);
-        $auth_content = Viewer::render('auth', [
+        $auth_content = Viewer::render('auth',
+            array_merge([
             'strings' => $strings,
+                'language_select' => $language_select
 
-        ]);
+            ], $parameters));
         $layout_content = Viewer::render('layout',
             [
                 'content' => $auth_content,
-                'language_select' => $language_select,
                 'title' => 'TR_LOGIC']);
         print ($layout_content);
     }
 
     public static function auth()
     {
-        if (isset($_POST['login']) and isset($_POST['password'])) {
+        if (!empty($_POST['login']) and !empty($_POST['password'])) {
             $user = new Users();
             $login = $_POST['login'];
             $password = $_POST['password'];
@@ -59,11 +60,24 @@ final class Auth extends BaseController
                 if (password_verify($password, $user->get('password'))) {
                     $_SESSION['user_login'] = $user->get('login');
                     Router::redirect('/account');
+                } else {
+                    $error = Languages::get_language_strings()['ERROR_WRONG_PASSWORD'];
+                    self::view(["error" => $error]);
                 }
+            } else {
+                $error = Languages::get_language_strings()['ERROR_WRONG_LOGIN'];
+                self::view(["error" => $error]);
             }
         } else {
-            Router::redirect('/auth');
+            $error = Languages::get_language_strings()['ERROR_REQUIRED_FIELDS_EMPTY'];
+            self::view(["error" => $error]);
         }
+    }
+
+    public static function logout()
+    {
+        unset($_SESSION['user_login']);
+        Router::redirect('/');
     }
 }
 

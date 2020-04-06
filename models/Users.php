@@ -3,6 +3,7 @@
 namespace models;
 
 use core\DataBase;
+use Exception;
 
 /**
  * Class Users
@@ -29,6 +30,7 @@ class Users
     public function __construct()
     {
         $this->db = DataBase::connect();
+        $this->create_datetime = date("Y-m-d H:i:s", time());
     }
 
     public function new(array $user_data)
@@ -91,11 +93,10 @@ class Users
     public function save()
     {
         if (is_null($this->id)) {
-            $this->insert();
-            return $this;
+            return $this->insert();
+
         } else {
-            $this->update();
-            return $this;
+            return $this->update();
         }
 
     }
@@ -104,19 +105,29 @@ class Users
     {
         $sql = "INSERT INTO " . self::TABLE_NAME . "(" . $this->get_field_names_for_insert() . ") ";
         $sql .= "VALUES (" . $this->get_fields_values_for_insert() . ");";
-        $result = $this->db->query_prepare($sql, $this->get_fields_assoc());
-        if ($result) {
-            $this->id = $result;
+        try {
+            $result = $this->db->query_prepare($sql, $this->get_fields_assoc());
+            if ($result) {
+                $this->id = $result;
+                return true;
+            }
+        } catch (Exception $exp) {
+            return false;
         }
+
 
     }
 
     private function update()
     {
         $sql = "UPDATE " . self::TABLE_NAME . " SET " . $this->get_fields_values_for_update() . " WHERE id=$this->id";
-        $result = $this->db->query_prepare($sql, $this->get_fields_assoc());
-        if ($result == 0) {
-            return true;
+        try {
+            $result = $this->db->query_prepare($sql, $this->get_fields_assoc());
+            if ($result == 0) {
+                return true;
+            }
+        } catch (Exception $exp) {
+            return false;
         }
 
     }
@@ -177,6 +188,20 @@ class Users
         }
         $string = trim($string, ",");
         return $string;
+    }
+
+    public static function is_auth()
+    {
+        if (!empty($_SESSION["user_login"])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function auth_no_pass()
+    {
+        $_SESSION['user_login'] = $this->login;
     }
 
 

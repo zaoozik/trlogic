@@ -1,29 +1,50 @@
-<form class="form-horizontal auth" action="/auth" method="POST">
-    <div class="form-group">
-        <label for="login" class="col-sm-2 control-label"><?= $strings["LOGIN"] ?></label>
-        <div class="col-sm-10">
-            <input type="login" class="form-control" name="login" id="login" placeholder="<?= $strings["LOGIN"] ?>">
-        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <img src="/assets/images/logo.png">
+        <?= $language_select ?>
     </div>
-    <div class="form-group">
-        <label for="password" class="col-sm-2 control-label"><?= $strings["PASSWORD"] ?></label>
-        <div class="col-sm-10">
-            <input type="password" name="password" class="form-control" id="password"
-                   placeholder="<?= $strings["PASSWORD"] ?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default"><?= $strings["SIGN_IN"] ?></button>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <a href='/register' class="btn btn-default"><?= $strings["REGISTRATION"] ?></a>
-        </div>
-    </div>
+</div>
+<div class="row">
 
 
-</form>
+    <form class="form-horizontal auth" action="/auth" method="POST">
 
+        <div class="form-group">
+            <div class="col-sm-12">
+                <p class="lead h1 display-4"><?= $strings["AUTH_WELCOME"] ?></p>
+                <p class="small"><?= $strings["AUTH_WELCOME_SUB"] ?></p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="login" class="form-control form-control-lg" name="login" id="login"
+                       placeholder="<?= $strings["LOGIN"] ?>" value="<?= $_POST['login'] ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="password" name="password" class="form-control form-control-lg" id="password"
+                       placeholder="<?= $strings["PASSWORD"] ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-12">
+                <button type="submit" class="btn btn-dark"><?= $strings["SIGN_IN"] ?></button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <p class="small sign-up"><?= $strings["AUTH_SIGN_UP"] ?></p>
+            <a href='/registration' class="small"><?= $strings["REGISTRATION"] ?></a>
+        </div>
+
+        <? if (isset($error)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?= $error ?>
+            </div>
+        <? endif; ?>
+
+    </form>
+
+
+</div>

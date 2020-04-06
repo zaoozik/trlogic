@@ -43,7 +43,7 @@ final class DataBase {
 
         $this->conn = mysqli_connect(self::$host, self::$user, self::$password, self::$database);
         if (! $this->conn){
-            throw new Exception(mysqli_connect_error());
+            die('DB ERROR. SITE WILL BE ABLE SOON.');
         }
         mysqli_set_charset($this->conn, "utf8");
 
@@ -74,8 +74,7 @@ final class DataBase {
     public function query_prepare(string $query, array $parameters = [])
     {
         if (!$stmt = $this->conn->prepare($query)) {
-            $errorMsg = "Can't init mysql prepare statement" . $this->conn->error;
-            die($errorMsg);
+            throw new Exception("Can't init mysql prepare statement" . $this->conn->error);
         }
 
         if ($parameters) {
@@ -103,13 +102,11 @@ final class DataBase {
 
 
             if (!$stmt->bind_param(...$values)) {
-                $errorMsg = "Can't bind parameters to prepared  mysql statement. " . $stmt->error;
-                die($errorMsg);
+                throw new Exception("Can't bind parameters to prepared  mysql statement. " . $stmt->error);
             }
 
             if (!$stmt->execute()) {
-                $errorMsg = "Error in executing query. " . $stmt->error;
-                die($errorMsg);
+                throw new Exception("Error in executing query. " . $stmt->error);
             }
             if ($res = $stmt->get_result()) {
                 $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);

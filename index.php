@@ -5,6 +5,8 @@ use core\Languages;
 use core\Router;
 
 
+ini_set('short_open_tag', 1);
+
 //SITES CONSTS
 
 define('SITE_ROOT', __DIR__ . DIRECTORY_SEPARATOR);

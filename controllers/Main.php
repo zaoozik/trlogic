@@ -5,12 +5,18 @@ namespace controllers;
 use core\BaseController;
 use core\Languages;
 use core\Router;
+use models\Users;
 
 final class Main extends BaseController{
 
     public static function view(){
 
-        Router::redirect('/auth');
+        if (Users::is_auth()) {
+            Router::redirect('/account');
+        } else {
+            Router::redirect('/auth');
+        }
+
 
 
     }
@@ -21,7 +27,7 @@ final class Main extends BaseController{
         if (!empty($new_language)) {
             Languages::set_current_language($new_language);
         }
-        Router::redirect('/');
+        Router::redirect($_SERVER['HTTP_REFERER']);
 
 
     }
