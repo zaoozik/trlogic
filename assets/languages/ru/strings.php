@@ -33,5 +33,10 @@ return [
     "ERROR_CONFIRM_PASSWORD" => "Пароли не совпадают!",
     "ERROR_SERVER_ERROR" => "Произошла ошибка на сервере. Попробуйте позже.",
     "ERROR_UPLOAD_FILE_MAX_SIZE" => "Превышен размер максимального файла. Ограничение - 10 Мб.",
-    "ERROR_UPLOAD_FILE_EXT" => "Расширение файла должно быть: jpg, png, gif."
+    "ERROR_UPLOAD_FILE_EXT" => "Расширение файла должно быть: jpg, png, gif.",
+    "VALIDATION_AUTH_LOGIN" => "Введите логин!",
+    "VALIDATION_AUTH_PASSWORD" => "Введите пароль!",
+    "VALIDATION_REGISTRATION_LOGIN" => "Логин может состоять из символов латинского алфавита, цифр, символов '_' '-', и содержать от 3 до 16 символов.",
+    "VALIDATION_REGISTRATION_PASSWORD" => "Пароль может состоять из символов латинского алфавита, цифр, символов '_' '-', и содержать от 4 до 20 символов.",
+    "VALIDATION_REGISTRATION_CONFIRM_PASSWORD" => "Пароли не совпадают",
 ];

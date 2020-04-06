@@ -7,7 +7,7 @@
 <div class="row">
 
 
-    <form class="form-horizontal registration" action="/registration" method="POST">
+    <form class="form-horizontal registration" action="/registration" method="POST" id="registration_form" novalidate>
 
         <div class="form-group">
             <div class="col-sm-12">
@@ -21,14 +21,20 @@
                    class=" control-label form-control-lg"><?= $strings["REGISTRATION_LOGIN_PLACEHOLDER"] ?></label>
             <div class="col-sm-12">
                 <input type="login" class="form-control form-control-lg" name="login" id="login"
-                       value="<?= $_POST['login'] ?>">
+                       value="<?= $_POST['login'] ?>" required>
+                <div class="invalid-feedback">
+                    <?= $strings["VALIDATION_REGISTRATION_LOGIN"] ?>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label for="password"
                    class="control-label form-control-lg"><?= $strings["REGISTRATION_PASSWORD_PLACEHOLDER"] ?></label>
             <div class="col-sm-12">
-                <input type="password" name="password" class="form-control form-control-lg" id="password">
+                <input type="password" name="password" class="form-control form-control-lg" id="password" required>
+                <div class="invalid-feedback">
+                    <?= $strings["VALIDATION_REGISTRATION_PASSWORD"] ?>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -36,7 +42,10 @@
                    class="control-label form-control-lg"><?= $strings["REGISTRATION_CONFIRM_PASSWORD_PLACEHOLDER"] ?></label>
             <div class="col-sm-12">
                 <input type="password" name="password_confirm" class="form-control form-control-lg"
-                       id="password_confirm">
+                       id="password_confirm" required>
+                <div class="invalid-feedback">
+                    <?= $strings["VALIDATION_REGISTRATION_CONFIRM_PASSWORD"] ?>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -59,3 +68,4 @@
 
 </div>
 
+<script src="/assets/js/registration.js"></script>

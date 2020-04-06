@@ -163,7 +163,7 @@ final class Account extends BaseController
         //сохраняем мелкое фото
         self::imgResize($picture, $file_path, 1);
         $user->set('avatar_src', $file_url)->save();
-        self::view();
+        Router::redirect('/account');
 
 
     }

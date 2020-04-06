@@ -33,5 +33,10 @@ return [
     "ERROR_CONFIRM_PASSWORD" => "Password mismatch!",
     "ERROR_SERVER_ERROR" => "Server error. Please, try again soon.",
     "ERROR_UPLOAD_FILE_MAX_SIZE" => "File size limit is 10 Mb.",
-    "ERROR_UPLOAD_FILE_EXT" => "Valid file extensions: jpg, png, gif."
+    "ERROR_UPLOAD_FILE_EXT" => "Valid file extensions: jpg, png, gif.",
+    "VALIDATION_AUTH_LOGIN" => "Login is required",
+    "VALIDATION_AUTH_PASSWORD" => "Password is required",
+    "VALIDATION_REGISTRATION_LOGIN" => "Login must contains only letters, digits, '_', '-', and must be from 3 to 16 symbols long.",
+    "VALIDATION_REGISTRATION_PASSWORD" => "Password must contains only letters, digits, '_', '-', and must be from 4 to 20 symbols long.",
+    "VALIDATION_REGISTRATION_CONFIRM_PASSWORD" => "Passwords mismatch",
 ];

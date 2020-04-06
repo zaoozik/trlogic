@@ -66,7 +66,7 @@ final class Auth extends BaseController
                     self::view(["error" => $error]);
                 }
             } else {
-                $error = Languages::get_language_strings()['ERROR_WRONG_LOGIN'];
+                $error = Languages::get_language_strings()['ERROR_WRONG_PASSWORD'];
                 self::view(["error" => $error]);
             }
         } else {

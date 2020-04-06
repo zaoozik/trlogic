@@ -32,7 +32,7 @@ footer {
     margin: auto auto;
     padding: 20px 30px 20px 20px;
     width: 560px;
-    height: 410px;
+    height: auto;
     max-width: 560px;
 }
 
@@ -43,10 +43,10 @@ footer {
 
 .registration {
     position: relative;
-    margin: 0 auto;
+    margin: auto auto;
     padding: 20px 30px 20px 20px;
     width: 560px;
-    height: 750px;
+    height: auto !important;
     max-width: 560px;
 }
 

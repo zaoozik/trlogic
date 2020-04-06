@@ -7,7 +7,7 @@
 <div class="row">
 
 
-    <form class="form-horizontal auth" action="/auth" method="POST">
+    <form class="form-horizontal auth" action="/auth" method="POST" id="auth_form" novalidate>
 
         <div class="form-group">
             <div class="col-sm-12">
@@ -19,13 +19,19 @@
         <div class="form-group">
             <div class="col-sm-12">
                 <input type="login" class="form-control form-control-lg" name="login" id="login"
-                       placeholder="<?= $strings["LOGIN"] ?>" value="<?= $_POST['login'] ?>">
+                       placeholder="<?= $strings["LOGIN"] ?>" value="<?= $_POST['login'] ?>" required>
+                <div class="invalid-feedback">
+                    <?= $strings["VALIDATION_AUTH_LOGIN"] ?>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">
                 <input type="password" name="password" class="form-control form-control-lg" id="password"
-                       placeholder="<?= $strings["PASSWORD"] ?>">
+                       placeholder="<?= $strings["PASSWORD"] ?>" required>
+                <div class="invalid-feedback">
+                    <?= $strings["VALIDATION_AUTH_PASSWORD"] ?>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -48,3 +54,5 @@
 
 
 </div>
+
+<script src="/assets/js/auth.js"></script>
