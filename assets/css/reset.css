@@ -64,3 +64,9 @@ footer {
     margin-top: 15px;
     text-align: center;
 }
+
+.account {
+    background: #ffffff;
+    margin: 5% 20%;
+    padding: 5%;
+}

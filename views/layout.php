@@ -7,10 +7,7 @@
 </head>
 <body>
 
-<!--<nav class="navbar navbar-light bg-light">-->
-<!--    <div class="navbar-brand">TR LOGIC</div>-->
-<!--    --><? //= $language_select ?>
-<!--</nav>-->
+<?= $navigation ?>
 
 <div class="container-fluid wrapper" id="content">
 

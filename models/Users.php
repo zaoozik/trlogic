@@ -22,6 +22,7 @@ class Users
     private $password;
     private $name;
     private $surname;
+    private $email;
     private $create_datetime;
     private $avatar_src;
     private $info;
@@ -31,6 +32,12 @@ class Users
     {
         $this->db = DataBase::connect();
         $this->create_datetime = date("Y-m-d H:i:s", time());
+        $this->avatar_src = DEFAULT_AVATAR;
+    }
+
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
     }
 
     public function new(array $user_data)
@@ -134,13 +141,9 @@ class Users
 
     private function set_fields(array $fields)
     {
-        $this->login = $fields["login"];
-        $this->password = $fields["password"];
-        $this->name = $fields["name"];
-        $this->surname = $fields["surname"];
-        $this->create_datetime = $fields["create_datetime"];
-        $this->avatar_src = $fields["avatar_src"];
-        $this->info = $fields["info"];
+        foreach ($fields as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     private function get_field_names_for_insert()
@@ -169,10 +172,13 @@ class Users
         return $string;
     }
 
-    private function get_fields_assoc()
+    private function get_fields_assoc($id = false)
     {
         $fields = get_object_vars($this);
-        unset($fields['id']);
+        if (!$id) {
+            unset($fields['id']);
+        }
+
         unset($fields['db']);
         return $fields;
     }
@@ -184,7 +190,7 @@ class Users
         unset($fields['db']);
         $string = "";
         foreach ($fields as $key => $value) {
-            $string .= $key . ' = ?,';
+            $string .= $key . '=?,';
         }
         $string = trim($string, ",");
         return $string;
@@ -192,7 +198,7 @@ class Users
 
     public static function is_auth()
     {
-        if (!empty($_SESSION["user_login"])) {
+        if (isset($_SESSION["user_login"])) {
             return true;
         } else {
             return false;
@@ -203,6 +209,17 @@ class Users
     {
         $_SESSION['user_login'] = $this->login;
     }
+
+    public function get_authorized()
+    {
+        return $this->get_by_login($_SESSION['user_login']);
+    }
+
+    public function assoc()
+    {
+        return $this->get_fields_assoc();
+    }
+
 
 
 }

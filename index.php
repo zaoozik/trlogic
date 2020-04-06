@@ -15,6 +15,8 @@ define("CONTROLLERS", SITE_ROOT . 'controllers' . DIRECTORY_SEPARATOR);
 define("VIEWS", SITE_ROOT . 'views' . DIRECTORY_SEPARATOR);
 define("LANGUAGE_STRINGS_PATH", SITE_ROOT . 'assets' . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR);
 define("DEFAULT_LANGUAGE", "ru");
+define("FILESTORE", SITE_ROOT . 'filestore' . DIRECTORY_SEPARATOR);
+define("DEFAULT_AVATAR", '/assets/images/avatar.png');
 
 
 // register autoloader
@@ -29,7 +31,10 @@ spl_autoload_register(function ($class)  {
         return false;
 });
 
+
 session_start();
+
+
 if (!isset($_SESSION['LANGUAGE'])) {
     $_SESSION['LANGUAGE'] = DEFAULT_LANGUAGE;
 }

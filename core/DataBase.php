@@ -74,7 +74,7 @@ final class DataBase {
     public function query_prepare(string $query, array $parameters = [])
     {
         if (!$stmt = $this->conn->prepare($query)) {
-            throw new Exception("Can't init mysql prepare statement" . $this->conn->error);
+            throw new Exception("Can't init mysql prepare statement " . $this->conn->error);
         }
 
         if ($parameters) {

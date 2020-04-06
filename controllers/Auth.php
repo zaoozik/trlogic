@@ -48,13 +48,14 @@ final class Auth extends BaseController
                 'content' => $auth_content,
                 'title' => 'TR_LOGIC']);
         print ($layout_content);
+        exit();
     }
 
     public static function auth()
     {
         if (!empty($_POST['login']) and !empty($_POST['password'])) {
             $user = new Users();
-            $login = $_POST['login'];
+            $login = htmlspecialchars($_POST['login']);
             $password = $_POST['password'];
             if ($user->get_by_login($login)) {
                 if (password_verify($password, $user->get('password'))) {

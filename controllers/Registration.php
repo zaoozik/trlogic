@@ -49,6 +49,7 @@ final class Registration extends BaseController
                 'title' => 'TRLOGIC'
             ]);
         print ($layout_content);
+        exit();
     }
 
     public static function registration()
